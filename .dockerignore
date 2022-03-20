@@ -1,0 +1,4 @@
+LICENSE  Procfile  README.md  __pycache__  app.py  requirements.txt  sonar-project.properties  test.py
+.git
+.github
+.gitignore
