@@ -1,4 +1,3 @@
-# Nome do Workflow update
 name: DevOpsLab Pipeline
 
 # Evento que irá acionar a pipeline
@@ -40,13 +39,17 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  Build:
+ Build:
       needs: [UnitTest,SonarCloud ]
       name: Build
       runs-on: ubuntu-latest
       steps: 
         - name: Checkout Repo
           uses: actions/checkout@v2
+
+       - name: New Relic License
+          run: |
+             sed -i "s/licensekey/${{ secrets.NEW_RELIC_LICENSE_KEY }}/g" Dockerfile
 
         - name: Login to Heroku Container registry
           env: 
